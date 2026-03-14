@@ -2,130 +2,74 @@
 <html>
 
 <head>
-
-<!-- Character encoding -->
 <meta charset="UTF-8">
-
-<!-- Responsive design for mobile -->
 <meta name="viewport" content="width=device-width, initial-scale=1">
-
-<!-- Page title -->
 <title>Weather Dashboard</title>
 
-<!-- Connect CSS file -->
 <link rel="stylesheet" href="style.css">
-
-<!-- PWA manifest -->
 <link rel="manifest" href="manifest.json">
-
-<!-- Chart.js for weather analytics -->
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
 </head>
 
 <body>
 
-<!-- ===============================
-     LOADING SCREEN
-================================ -->
-
+<!-- Loading Screen -->
 <div id="loader">
-
-<div class="spinner"></div>
-
-<p>Loading Weather Data...</p>
-
+  <div class="spinner"></div>
+  <p>Loading Weather Data...</p>
 </div>
 
-
-<!-- ===============================
-     MAIN APP
-================================ -->
-
+<!-- Main App -->
 <div class="app">
+  <div class="card">
+    <h2>Weather Dashboard</h2>
 
-<div class="card">
+    <!-- Search -->
+    <div class="search">
+      <input id="cityInput" placeholder="Enter city name">
+      <button onclick="getWeather()">Search</button>
+      <button onclick="getCurrentLocation()">📍 Current Location</button>
+    </div>
 
-<!-- App Title -->
-<h2>Weather Dashboard</h2>
+    <!-- Current Weather -->
+    <div class="weather">
+      <img id="weatherIcon" width="90">
+      <h1 id="temp">--°C</h1>
+      <p id="condition">Search a city</p>
+      <div class="details">
+        <div>
+          <p>Humidity</p>
+          <span id="humidity">--%</span>
+        </div>
+        <div>
+          <p>Wind</p>
+          <span id="wind">-- km/h</span>
+        </div>
+        <div>
+          <p>Sunrise</p>
+          <span id="sunrise">--</span>
+        </div>
+        <div>
+          <p>Sunset</p>
+          <span id="sunset">--</span>
+        </div>
+      </div>
+    </div>
 
+    <!-- 5-Day Forecast -->
+    <h3>5-Day Forecast</h3>
+    <div id="forecastContainer" class="forecast-container"></div>
 
-<!-- ===============================
-     SEARCH SECTION
-================================ -->
+    <!-- Hourly Chart -->
+    <h3>Hourly Temperature</h3>
+    <canvas id="tempChart"></canvas>
 
-<div class="search">
+    <!-- Animated Effects -->
+    <div id="weatherAnimation" class="weather-animation"></div>
 
-<input id="cityInput" placeholder="Enter city name">
-
-<button onclick="getWeather()">Search</button>
-
+  </div>
 </div>
-
-
-<!-- ===============================
-     WEATHER INFORMATION
-================================ -->
-
-<div class="weather">
-
-<!-- Weather Icon -->
-<img id="weatherIcon" width="90">
-
-<!-- Temperature -->
-<h1 id="temp">--°C</h1>
-
-<!-- Weather Condition -->
-<p id="condition">Search a city</p>
-
-
-<!-- Weather Details -->
-<div class="details">
-
-<div>
-<p>Humidity</p>
-<span id="humidity">--%</span>
-</div>
-
-<div>
-<p>Wind</p>
-<span id="wind">-- km/h</span>
-</div>
-
-<div>
-<p>Sunrise</p>
-<span id="sunrise">--</span>
-</div>
-
-<div>
-<p>Sunset</p>
-<span id="sunset">--</span>
-</div>
-
-</div>
-
-</div>
-
-
-<!-- ===============================
-     WEATHER ANALYTICS
-================================ -->
-
-<h3>Weather Analytics</h3>
-
-<!-- Temperature chart -->
-<canvas id="tempChart"></canvas>
-
-</div>
-
-</div>
-
-
-<!-- ===============================
-     MAIN JAVASCRIPT
-================================ -->
-
+<!-- Connect javascript -->
 <script src="script.js"></script>
-
 </body>
 </html>
