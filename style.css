@@ -8,7 +8,7 @@ body {
     color: #222;
     overflow-x: hidden;
 
-    /* SKY BLUE BACKGROUND */
+    /* NEW SKY BLUE BACKGROUND */
     background: #87CEEB;
 }
 
@@ -31,7 +31,7 @@ body {
 }
 
 /* =========================
-   WEATHER CARD (HORIZONTAL)
+   WEATHER CARD
 ========================= */
 .card {
     position: relative;
@@ -40,19 +40,12 @@ body {
     border-radius: 25px;
     backdrop-filter: blur(10px);
 
-    /* WIDER CARD FOR HORIZONTAL VIEW */
-    width: 1100px;
-    max-width: 95%;
+    /* INCREASED WIDTH */
+    width: 520px;
 
     box-shadow: 0 10px 30px rgba(0,0,0,0.25);
-
-    /* FLEX LAYOUT */
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    gap: 25px;
-
     text-align: center;
+    transition: transform 0.3s ease;
 }
 
 .card:hover {
@@ -66,7 +59,6 @@ body {
     display: flex;
     gap: 10px;
     margin-bottom: 20px;
-    width: 100%;
 }
 
 .search input {
@@ -97,11 +89,6 @@ button:hover {
 /* =========================
    CURRENT WEATHER
 ========================= */
-.weather {
-    flex: 1;
-    min-width: 250px;
-}
-
 .weather img#weatherIcon {
     margin-bottom: 10px;
     transition: transform 0.5s ease;
@@ -138,14 +125,12 @@ button:hover {
 
 .forecast-container {
 
-    /* HORIZONTAL FORECAST */
-    display: flex;
-    justify-content: space-between;
+    /* FIX: ensure cards stay inside */
+    display: grid;
+    grid-template-columns: repeat(5,1fr);
 
     margin-top: 20px;
     gap: 10px;
-
-    flex: 1.5;
 }
 
 .forecast-card {
@@ -156,7 +141,6 @@ button:hover {
     font-size: 13px;
     color: #333;
     transition: transform 0.3s ease;
-    flex: 1;
 }
 
 .forecast-card:hover {
@@ -175,9 +159,6 @@ canvas {
     background: rgba(255,255,255,0.4);
     padding: 12px;
     border-radius: 12px;
-
-    /* REDUCED HEIGHT SO EVERYTHING FITS */
-    height: 200px !important;
 }
 
 /* =========================
