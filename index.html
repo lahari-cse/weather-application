@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Weather Widget</title>
+
+  <!-- Connect CSS -->
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+
+  <div class="app">
+
+    <div class="card">
+
+      <!-- Title -->
+      <h2>🌤 Weather App</h2>
+
+      <!-- Search Box (Optional Backup) -->
+      <div class="search">
+        <input
+          type="text"
+          id="cityInput"
+          placeholder="Enter city name"
+        />
+
+        <button onclick="getWeather()">
+          Search
+        </button>
+      </div>
+
+      <!-- Weather Info -->
+      <div class="weather">
+
+        <h3>Current Weather</h3>
+
+        <!-- Temperature -->
+        <h1 id="temp">--°C</h1>
+
+        <!-- Condition -->
+        <p id="condition">Loading...</p>
+
+        <!-- Extra Details -->
+        <div class="details">
+
+          <!-- Humidity -->
+          <div>
+            <p>Humidity</p>
+            <span id="humidity">--%</span>
+          </div>
+
+          <!-- Wind -->
+          <div>
+            <p>Wind</p>
+            <span id="wind">-- km/h</span>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- Connect JavaScript -->
+  <script src="script.js"></script>
+
+</body>
+</html>
