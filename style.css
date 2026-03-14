@@ -6,6 +6,13 @@ transition:background 0.6s ease;
 }
 
 /* WEATHER THEMES */
+.weather{
+text-align:center;
+}
+
+#weatherIcon{
+margin-bottom:10px;
+}
 
 .sunny{
 background:linear-gradient(135deg,#f6d365,#fda085);
