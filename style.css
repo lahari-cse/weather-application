@@ -1,18 +1,14 @@
-/* =================================
-   GLOBAL RESET
-================================= */
-
+/* Remove default margin */
 body{
 margin:0;
 font-family:Arial;
+
+/* Gradient background */
 background:linear-gradient(135deg,#4facfe,#00f2fe);
 }
 
 
-/* =================================
-   MAIN APP CONTAINER
-================================= */
-
+/* Center app */
 .app{
 display:flex;
 justify-content:center;
@@ -21,30 +17,34 @@ height:100vh;
 }
 
 
-/* =================================
-   MAIN WEATHER CARD
-================================= */
-
+/* Weather card */
 .card{
+
 background:rgba(255,255,255,0.2);
+
 padding:25px;
+
 border-radius:20px;
+
+/* Glassmorphism effect */
 backdrop-filter:blur(10px);
+
 width:360px;
+
 color:white;
+
 }
 
 
-/* =================================
-   SEARCH BAR STYLING
-================================= */
-
+/* Search section */
 .search{
 display:flex;
 gap:10px;
 margin-bottom:20px;
 }
 
+
+/* Input field */
 .search input{
 flex:1;
 padding:8px;
@@ -53,10 +53,7 @@ border:none;
 }
 
 
-/* =================================
-   BUTTON STYLE
-================================= */
-
+/* Buttons */
 button{
 padding:8px 12px;
 border:none;
@@ -65,10 +62,7 @@ cursor:pointer;
 }
 
 
-/* =================================
-   WEATHER DETAILS GRID
-================================= */
-
+/* Weather details grid */
 .details{
 display:grid;
 grid-template-columns:repeat(2,1fr);
@@ -77,84 +71,73 @@ margin-top:15px;
 }
 
 
-/* =================================
-   FORECAST SECTION
-================================= */
-
-#forecastContainer{
-display:flex;
-gap:10px;
-margin-top:10px;
-}
-
-.forecastDay{
-background:rgba(255,255,255,0.3);
-padding:10px;
-border-radius:10px;
-text-align:center;
-}
-
-
-/* =================================
-   HOURLY FORECAST CARDS
-================================= */
-
-#hourlyForecast{
-display:flex;
-overflow-x:auto;
-gap:10px;
-margin-top:10px;
-}
-
-.hourCard{
-background:rgba(255,255,255,0.3);
-padding:8px;
-border-radius:8px;
-min-width:60px;
-}
-
-
-/* =================================
-   CHART STYLING
-================================= */
-
+/* Chart styling */
 canvas{
+
 margin-top:20px;
+
 background:rgba(255,255,255,0.2);
+
 padding:10px;
+
 border-radius:10px;
+
 }
 
 
-/* =================================
-   LOADING SCREEN
-================================= */
-
+/* Loading screen */
 #loader{
+
 position:fixed;
+
 top:0;
+
 left:0;
+
 width:100%;
+
 height:100%;
+
 background:#4facfe;
+
 display:flex;
+
 flex-direction:column;
+
 justify-content:center;
+
 align-items:center;
+
 color:white;
+
 z-index:1000;
+
 }
 
+
+/* Spinner animation */
 .spinner{
+
 border:6px solid white;
+
 border-top:6px solid transparent;
+
 border-radius:50%;
+
 width:50px;
+
 height:50px;
+
 animation:spin 1s linear infinite;
+
 }
 
+
+/* Spinner rotation */
 @keyframes spin{
+
 0%{transform:rotate(0deg)}
+
 100%{transform:rotate(360deg)}
+
 }
