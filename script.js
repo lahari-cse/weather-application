@@ -116,8 +116,7 @@ container.appendChild(drop);
 ========================== */
 
 function drawForecast(data){
-
-const container=document.getElementById("forecastContainer");
+   const container = document.getElementById("forecastContainer");
 container.innerHTML="";
 
 for(let i=0;i<5;i++){
