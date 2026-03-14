@@ -112,7 +112,7 @@ container.appendChild(drop);
 }
 
 /* ==========================
-   FORECAST
+   FORECAST (UPDATED)
 ========================== */
 
 function drawForecast(data){
@@ -120,18 +120,22 @@ function drawForecast(data){
 const container=document.getElementById("forecastContainer");
 container.innerHTML="";
 
-for(let i=0;i<5;i++){
+/* Skip today → start from tomorrow */
+
+for(let i=1;i<=5;i++){
 
 const date=new Date(data.daily.time[i]);
 const max=Math.round(data.daily.temperature_2m_max[i]);
 const min=Math.round(data.daily.temperature_2m_min[i]);
 const code=data.daily.weathercode[i];
 
+const dayName=date.toLocaleDateString('en-US',{weekday:'short'});
+
 const card=document.createElement("div");
 card.classList.add("forecast-card");
 
 card.innerHTML=`
-<p>${date.toLocaleDateString('en-US',{weekday:'short'})}</p>
+<p>${dayName}</p>
 <p>${getWeatherDescription(code)}</p>
 <p>${max}°/${min}°</p>
 `;
@@ -194,25 +198,18 @@ const res=await fetch(url);
 const data=await res.json();
 
 document.getElementById("temp").innerText=Math.round(data.current.temperature_2m)+"°C";
-
 document.getElementById("humidity").innerText=data.current.relative_humidity_2m+"%";
-
 document.getElementById("wind").innerText=data.current.wind_speed_10m+" km/h";
-
 document.getElementById("condition").innerText=getWeatherDescription(data.current.weather_code);
 
 document.getElementById("sunrise").innerText=new Date(data.daily.sunrise[0]).toLocaleTimeString();
-
 document.getElementById("sunset").innerText=new Date(data.daily.sunset[0]).toLocaleTimeString();
 
 setWeatherIcon(data.current.weather_code);
-
 setBackground(data.current.weather_code);
-
 animateWeather(data.current.weather_code);
 
 drawForecast(data);
-
 drawCharts(data);
 
 }
@@ -237,7 +234,6 @@ const city=document.getElementById("cityInput").value;
 if(!city) return alert("Enter a city");
 
 const geo=await fetch(`https://geocoding-api.open-meteo.com/v1/search?name=${city}&count=1`);
-
 const data=await geo.json();
 
 if(!data.results) return alert("City not found");
@@ -258,12 +254,10 @@ function getCurrentLocation(){
 navigator.geolocation.getCurrentPosition(
 
 pos=>{
-
 fetchWeather(
 pos.coords.latitude,
 pos.coords.longitude
 )
-
 },
 
 ()=>alert("Location permission denied")
