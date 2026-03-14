@@ -4,9 +4,9 @@
 
 
 /* Hide loader when page loads */
-window.onload=function(){
+window.onload = function(){
 
-document.getElementById("loader").style.display="none"
+document.getElementById("loader").style.display = "none"
 
 }
 
@@ -18,49 +18,52 @@ document.getElementById("loader").style.display="none"
 
 async function getWeather(){
 
-// Get city name from input box
-const city=document.getElementById("cityInput").value
+// Get city name from input field
+const city = document.getElementById("cityInput").value
 
-// Check if user entered city
+// Check if city is empty
 if(!city){
+
 alert("Please enter a city name")
+
 return
+
 }
 
 // Show loading screen
-document.getElementById("loader").style.display="flex"
+document.getElementById("loader").style.display = "flex"
 
 try{
 
-// Fetch city coordinates from Open-Meteo geocoding API
-const geo=await fetch(`https://geocoding-api.open-meteo.com/v1/search?name=${city}&count=1`)
+// Get latitude and longitude from Open-Meteo Geocoding API
+const geo = await fetch(`https://geocoding-api.open-meteo.com/v1/search?name=${city}&count=1`)
 
-// Convert response to JSON
-const geoData=await geo.json()
+const geoData = await geo.json()
 
 // If city not found
 if(!geoData.results){
 
 alert("City not found")
 
-document.getElementById("loader").style.display="none"
+document.getElementById("loader").style.display = "none"
 
 return
 
 }
 
 // Extract latitude and longitude
-const lat=geoData.results[0].latitude
-const lon=geoData.results[0].longitude
+const lat = geoData.results[0].latitude
+const lon = geoData.results[0].longitude
 
-// Call weather API
-fetchWeather(lat,lon)
+// Fetch weather data
+fetchWeather(lat, lon)
 
-}catch(error){
+}
+catch(error){
 
 alert("Error fetching location")
 
-document.getElementById("loader").style.display="none"
+document.getElementById("loader").style.display = "none"
 
 }
 
@@ -72,18 +75,17 @@ document.getElementById("loader").style.display="none"
    FETCH WEATHER DATA
 ==================================== */
 
-async function fetchWeather(lat,lon){
+async function fetchWeather(lat, lon){
 
 try{
 
-// Open-Meteo weather API URL
-const url=`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current=temperature_2m,relative_humidity_2m,wind_speed_10m,weather_code&hourly=temperature_2m&daily=sunrise,sunset&timezone=auto`
+// Weather API URL
+const url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current=temperature_2m,relative_humidity_2m,wind_speed_10m,weather_code&hourly=temperature_2m&daily=sunrise,sunset&timezone=auto`
 
-// Request weather data
-const res=await fetch(url)
+// Fetch weather data
+const res = await fetch(url)
 
-// Convert response to JSON
-const data=await res.json()
+const data = await res.json()
 
 
 
@@ -92,20 +94,20 @@ const data=await res.json()
 ==================================== */
 
 // Temperature
-document.getElementById("temp").innerText=
-Math.round(data.current.temperature_2m)+"°C"
+document.getElementById("temp").innerText =
+Math.round(data.current.temperature_2m) + "°C"
 
 // Humidity
-document.getElementById("humidity").innerText=
-data.current.relative_humidity_2m+"%"
+document.getElementById("humidity").innerText =
+data.current.relative_humidity_2m + "%"
 
-// Wind speed
-document.getElementById("wind").innerText=
-data.current.wind_speed_10m+" km/h"
+// Wind Speed
+document.getElementById("wind").innerText =
+data.current.wind_speed_10m + " km/h"
 
-// Weather condition (using weather code)
-document.getElementById("condition").innerText=
-"Weather code: "+data.current.weather_code
+// Weather Condition Code
+document.getElementById("condition").innerText =
+"Weather code: " + data.current.weather_code
 
 
 
@@ -114,12 +116,20 @@ document.getElementById("condition").innerText=
 ==================================== */
 
 // Sunrise time
-document.getElementById("sunrise").innerText=
+document.getElementById("sunrise").innerText =
 data.daily.sunrise[0].split("T")[1]
 
 // Sunset time
-document.getElementById("sunset").innerText=
+document.getElementById("sunset").innerText =
 data.daily.sunset[0].split("T")[1]
+
+
+
+/* ====================================
+   CHANGE BACKGROUND BASED ON WEATHER
+==================================== */
+
+setBackground(data.current.weather_code)
 
 
 
@@ -129,33 +139,88 @@ data.daily.sunset[0].split("T")[1]
 
 drawCharts(data)
 
-}catch(error){
+}
+catch(error){
 
 alert("Weather fetch failed")
 
 }
 
 // Hide loader
-document.getElementById("loader").style.display="none"
+document.getElementById("loader").style.display = "none"
 
 }
 
 
 
 /* ====================================
-   DRAW CHART USING CHART.JS
+   WEATHER BACKGROUND THEMES
+==================================== */
+
+function setBackground(weatherCode){
+
+const body = document.body
+
+// Remove previous classes
+body.classList.remove("sunny","night","cloudy","rain")
+
+// Get current hour
+const hour = new Date().getHours()
+
+/* Night Theme */
+
+if(hour >= 19 || hour <= 5){
+
+body.classList.add("night")
+
+return
+
+}
+
+/* Weather Based Themes */
+
+if(weatherCode == 0){
+
+body.classList.add("sunny")
+
+}
+
+else if(weatherCode <= 3){
+
+body.classList.add("cloudy")
+
+}
+
+else if(weatherCode >= 51){
+
+body.classList.add("rain")
+
+}
+
+else{
+
+body.classList.add("sunny")
+
+}
+
+}
+
+
+
+/* ====================================
+   DRAW TEMPERATURE CHART
 ==================================== */
 
 function drawCharts(data){
 
-// Extract first 12 hours time
-const labels=data.hourly.time.slice(0,12).map(t=>t.split("T")[1])
+// First 12 hours time labels
+const labels = data.hourly.time.slice(0,12).map(t => t.split("T")[1])
 
-// Extract temperature data
-const temps=data.hourly.temperature_2m.slice(0,12)
+// Temperature data
+const temps = data.hourly.temperature_2m.slice(0,12)
 
 
-// Create line chart
+// Create chart
 new Chart(document.getElementById("tempChart"),{
 
 type:"line",
@@ -172,7 +237,9 @@ data:temps,
 
 borderColor:"white",
 
-backgroundColor:"rgba(255,255,255,0.3)"
+backgroundColor:"rgba(255,255,255,0.3)",
+
+tension:0.4
 
 }]
 
