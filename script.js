@@ -18,10 +18,9 @@ document.getElementById("loader").style.display = "none"
 
 async function getWeather(){
 
-// Get city name from input field
+// Get city name
 const city = document.getElementById("cityInput").value
 
-// Check if city is empty
 if(!city){
 
 alert("Please enter a city name")
@@ -30,17 +29,16 @@ return
 
 }
 
-// Show loading screen
+// Show loader
 document.getElementById("loader").style.display = "flex"
 
 try{
 
-// Get latitude and longitude from Open-Meteo Geocoding API
+// Get coordinates from Open-Meteo geocoding API
 const geo = await fetch(`https://geocoding-api.open-meteo.com/v1/search?name=${city}&count=1`)
 
 const geoData = await geo.json()
 
-// If city not found
 if(!geoData.results){
 
 alert("City not found")
@@ -51,14 +49,14 @@ return
 
 }
 
-// Extract latitude and longitude
+// Extract latitude & longitude
 const lat = geoData.results[0].latitude
 const lon = geoData.results[0].longitude
 
-// Fetch weather data
-fetchWeather(lat, lon)
+fetchWeather(lat,lon)
 
 }
+
 catch(error){
 
 alert("Error fetching location")
@@ -75,14 +73,12 @@ document.getElementById("loader").style.display = "none"
    FETCH WEATHER DATA
 ==================================== */
 
-async function fetchWeather(lat, lon){
+async function fetchWeather(lat,lon){
 
 try{
 
-// Weather API URL
 const url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current=temperature_2m,relative_humidity_2m,wind_speed_10m,weather_code&hourly=temperature_2m&daily=sunrise,sunset&timezone=auto`
 
-// Fetch weather data
 const res = await fetch(url)
 
 const data = await res.json()
@@ -101,32 +97,38 @@ Math.round(data.current.temperature_2m) + "°C"
 document.getElementById("humidity").innerText =
 data.current.relative_humidity_2m + "%"
 
-// Wind Speed
+// Wind
 document.getElementById("wind").innerText =
 data.current.wind_speed_10m + " km/h"
 
-// Weather Condition Code
+// Weather condition
 document.getElementById("condition").innerText =
 "Weather code: " + data.current.weather_code
 
 
 
 /* ====================================
-   SUNRISE AND SUNSET
+   SUNRISE / SUNSET
 ==================================== */
 
-// Sunrise time
 document.getElementById("sunrise").innerText =
 data.daily.sunrise[0].split("T")[1]
 
-// Sunset time
 document.getElementById("sunset").innerText =
 data.daily.sunset[0].split("T")[1]
 
 
 
 /* ====================================
-   CHANGE BACKGROUND BASED ON WEATHER
+   SET WEATHER ICON
+==================================== */
+
+setWeatherIcon(data.current.weather_code)
+
+
+
+/* ====================================
+   CHANGE BACKGROUND
 ==================================== */
 
 setBackground(data.current.weather_code)
@@ -134,12 +136,13 @@ setBackground(data.current.weather_code)
 
 
 /* ====================================
-   DRAW WEATHER CHART
+   DRAW CHART
 ==================================== */
 
 drawCharts(data)
 
 }
+
 catch(error){
 
 alert("Weather fetch failed")
@@ -154,21 +157,57 @@ document.getElementById("loader").style.display = "none"
 
 
 /* ====================================
-   WEATHER BACKGROUND THEMES
+   WEATHER ICON LOGIC
+==================================== */
+
+function setWeatherIcon(code){
+
+const icon = document.getElementById("weatherIcon")
+
+if(code == 0){
+
+// Sunny
+icon.src="https://cdn-icons-png.flaticon.com/512/869/869869.png"
+
+}
+
+else if(code <= 3){
+
+// Cloudy
+icon.src="https://cdn-icons-png.flaticon.com/512/414/414825.png"
+
+}
+
+else if(code >= 51){
+
+// Rain
+icon.src="https://cdn-icons-png.flaticon.com/512/1163/1163624.png"
+
+}
+
+else{
+
+icon.src="https://cdn-icons-png.flaticon.com/512/869/869869.png"
+
+}
+
+}
+
+
+
+/* ====================================
+   BACKGROUND THEMES
 ==================================== */
 
 function setBackground(weatherCode){
 
 const body = document.body
 
-// Remove previous classes
 body.classList.remove("sunny","night","cloudy","rain")
 
-// Get current hour
 const hour = new Date().getHours()
 
-/* Night Theme */
-
+// Night mode
 if(hour >= 19 || hour <= 5){
 
 body.classList.add("night")
@@ -177,8 +216,7 @@ return
 
 }
 
-/* Weather Based Themes */
-
+// Weather themes
 if(weatherCode == 0){
 
 body.classList.add("sunny")
@@ -208,19 +246,15 @@ body.classList.add("sunny")
 
 
 /* ====================================
-   DRAW TEMPERATURE CHART
+   DRAW WEATHER CHART
 ==================================== */
 
 function drawCharts(data){
 
-// First 12 hours time labels
 const labels = data.hourly.time.slice(0,12).map(t => t.split("T")[1])
 
-// Temperature data
 const temps = data.hourly.temperature_2m.slice(0,12)
 
-
-// Create chart
 new Chart(document.getElementById("tempChart"),{
 
 type:"line",
@@ -265,7 +299,7 @@ y:{ticks:{color:"white"}}
 
 
 /* ====================================
-   REGISTER SERVICE WORKER
+   SERVICE WORKER
 ==================================== */
 
 if("serviceWorker" in navigator){
