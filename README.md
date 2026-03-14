@@ -17,7 +17,7 @@ The app is built using HTML, CSS, and JavaScript, and it uses a free weather API
  ![Forecast](5-day-forecast.png)
 
  ### Hourly Temperature Chart
- ![Hourly Temperature](hourlytemperature.png) 
+ ![Hourly Temperature](hourly-temperature.png) 
 
 ## 🚀 Features
 
