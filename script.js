@@ -15,8 +15,7 @@ window.onload = () => {
     /* show today's day and date */
     showTodayDate();
 
-}
-}
+};
 
 /* ==========================
    WEATHER DESCRIPTION
