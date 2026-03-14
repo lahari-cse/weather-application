@@ -1,77 +1,125 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <title>Weather Widget</title>
+<!-- Basic Page Setup -->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <!-- Connect CSS -->
-  <link rel="stylesheet" href="style.css" />
+<title>Weather Dashboard</title>
+
+<!-- Connect CSS File -->
+<link rel="stylesheet" href="style.css">
+
+<!-- Connect PWA Manifest -->
+<link rel="manifest" href="manifest.json">
+
+<!-- Chart Library for Weather Analytics -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
 </head>
 
 <body>
 
-  <div class="app">
+<!-- Loading Screen -->
+<div id="loader">
 
-    <div class="card">
+<div class="spinner"></div>
 
-      <!-- Title -->
-      <h2>🌤 Weather App</h2>
+<p>Loading Weather Data...</p>
 
-      <!-- Search Box (Optional Backup) -->
-      <div class="search">
-        <input
-          type="text"
-          id="cityInput"
-          placeholder="Enter city name"
-        />
+</div>
 
-        <button onclick="getWeather()">
-          Search
-        </button>
-      </div>
+<!-- Main App Container -->
+<div class="app">
 
-      <!-- Weather Info -->
-      <div class="weather">
+<div class="card">
 
-        <h3>Current Weather</h3>    
-        <!-- Weather Icon -->
-        <img id="weatherIcon"
-        src="https://cdn-icons-png.flaticon.com/512/869/869869.png"
-        alt="Weather Icon">
-        <!-- Temperature -->
-        <h1 id="temp">--°C</h1>
+<!-- App Title -->
+<h2>Weather Dashboard</h2>
 
-        <!-- Condition -->
-        <p id="condition">Loading...</p>
+<!-- City Search Section -->
+<div class="search">
 
-        <!-- Extra Details -->
-        <div class="details">
+<!-- City Input -->
+<input id="cityInput" placeholder="Enter city name">
 
-          <!-- Humidity -->
-          <div>
-            <p>Humidity</p>
-            <span id="humidity">--%</span>
-          </div>
+<!-- Search Button (calls JS function) -->
+<button onclick="getWeather()">Search</button>
 
-          <!-- Wind -->
-          <div>
-            <p>Wind</p>
-            <span id="wind">-- km/h</span>
-          </div>
+<!-- Voice Search Button -->
+<button onclick="startVoice()">🎙</button>
 
-        </div>
+</div>
 
-      </div>
+<!-- Current Weather Section -->
+<div class="weather">
 
-    </div>
+<!-- Weather Icon -->
+<img id="weatherIcon" width="80">
 
-  </div>
+<!-- Temperature -->
+<h1 id="temp">--°C</h1>
 
-  <!-- Connect JavaScript -->
-  <script src="script.js"></script>
+<!-- Weather Condition -->
+<p id="condition">Loading...</p>
+
+<!-- Weather Details -->
+<div class="details">
+
+<div>
+<p>Humidity</p>
+<span id="humidity">--%</span>
+</div>
+
+<div>
+<p>Wind</p>
+<span id="wind">-- km/h</span>
+</div>
+
+<div>
+<p>Air Quality</p>
+<span id="aqi">--</span>
+</div>
+
+<div>
+<p>Sunrise</p>
+<span id="sunrise">--</span>
+</div>
+
+<div>
+<p>Sunset</p>
+<span id="sunset">--</span>
+</div>
+
+</div>
+
+</div>
+
+<!-- 5 Day Forecast Section -->
+<h3>5 Day Forecast</h3>
+
+<div id="forecastContainer"></div>
+
+<!-- Hourly Forecast Section -->
+<h3>Hourly Forecast</h3>
+
+<div id="hourlyForecast"></div>
+
+<!-- Weather Analytics Charts -->
+<h3>Weather Analytics</h3>
+
+<canvas id="tempChart"></canvas>
+<canvas id="humidityChart"></canvas>
+<canvas id="windChart"></canvas>
+
+</div>
+
+</div>
+
+<!-- Connect Main JavaScript File -->
+<script src="script.js"></script>
 
 </body>
 </html>
