@@ -8,6 +8,8 @@
 
 <link rel="stylesheet" href="style.css">
 <link rel="manifest" href="manifest.json">
+<link rel="icon" href="icons/weather-icon.png">
+
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 
@@ -22,13 +24,14 @@
 <!-- Main App -->
 <div class="app">
   <div class="card">
+
     <h2>Weather Dashboard</h2>
 
     <!-- Search -->
     <div class="search">
       <input id="cityInput" placeholder="Enter city name">
       <button onclick="getWeather()">Search</button>
-      <button onclick="getCurrentLocation()">📍 Current Location</button>
+      <button onclick="getCurrentLocation()">📍 Location</button>
     </div>
 
     <!-- Current Weather -->
@@ -36,19 +39,23 @@
       <img id="weatherIcon" width="90">
       <h1 id="temp">--°C</h1>
       <p id="condition">Search a city</p>
+
       <div class="details">
         <div>
           <p>Humidity</p>
           <span id="humidity">--%</span>
         </div>
+
         <div>
           <p>Wind</p>
           <span id="wind">-- km/h</span>
         </div>
+
         <div>
           <p>Sunrise</p>
           <span id="sunrise">--</span>
         </div>
+
         <div>
           <p>Sunset</p>
           <span id="sunset">--</span>
@@ -56,27 +63,31 @@
       </div>
     </div>
 
-    <!-- 5-Day Forecast -->
+    <!-- Forecast -->
     <h3>5-Day Forecast</h3>
     <div id="forecastContainer" class="forecast-container"></div>
 
-    <!-- Hourly Chart -->
+    <!-- Chart -->
     <h3>Hourly Temperature</h3>
     <canvas id="tempChart"></canvas>
 
-    <!-- Animated Effects -->
+    <!-- Animations -->
     <div id="weatherAnimation" class="weather-animation"></div>
 
   </div>
 </div>
-  <script>
+
+<script>
+
 if('serviceWorker' in navigator){
-    navigator.serviceWorker.register('service-worker.js')
-    .then(reg => console.log('Service Worker Registered'))
-    .catch(err => console.log('Service Worker registration failed:', err));
+navigator.serviceWorker.register('service-worker.js')
+.then(()=>console.log("Service Worker Registered"))
+.catch(err=>console.log(err));
 }
+
 </script>
-<!-- Connect javascript -->
+
 <script src="script.js"></script>
+
 </body>
 </html>
