@@ -5,8 +5,11 @@ body {
     margin: 0;
     font-family: 'Arial', sans-serif;
     transition: background 0.6s ease;
-    color: #222;   /* FIX: text visible on light backgrounds */
+    color: #222;
     overflow-x: hidden;
+
+    /* NEW SKY BLUE BACKGROUND */
+    background: #87CEEB;
 }
 
 /* =========================
@@ -32,11 +35,14 @@ body {
 ========================= */
 .card {
     position: relative;
-    background: rgba(255, 255, 255, 0.85); /* FIX */
-    padding: 25px;
+    background: rgba(255, 255, 255, 0.90);
+    padding: 30px;
     border-radius: 25px;
     backdrop-filter: blur(10px);
-    width: 380px;
+
+    /* INCREASED WIDTH */
+    width: 520px;
+
     box-shadow: 0 10px 30px rgba(0,0,0,0.25);
     text-align: center;
     transition: transform 0.3s ease;
@@ -116,18 +122,21 @@ button:hover {
 /* =========================
    FORECAST CARDS
 ========================= */
+
 .forecast-container {
-    display: flex;
-    justify-content: space-between;
+
+    /* FIX: ensure cards stay inside */
+    display: grid;
+    grid-template-columns: repeat(5,1fr);
+
     margin-top: 20px;
     gap: 10px;
 }
 
 .forecast-card {
-    background: #f2f6ff; /* cleaner card */
+    background: #f2f6ff;
     border-radius: 12px;
     padding: 10px;
-    width: 70px;
     text-align: center;
     font-size: 13px;
     color: #333;
@@ -217,7 +226,7 @@ canvas {
     100%{transform:rotate(360deg);}
 }
 
-/* BETTER CLOUDS */
+/* CLOUDS */
 
 .cloud {
     position:absolute;
