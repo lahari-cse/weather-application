@@ -1,45 +1,42 @@
-const CACHE_NAME = "weather-app-cache-v1";
-
+/* ==========================
+SERVICE WORKER
+Offline caching for Weather App
+========================== */
+const CACHE_NAME = "weather-app-v1";
 const urlsToCache = [
-  "/",
-  "/index.html",
-  "/style.css",
-  "/script.js"
+"index.html",
+"style.css",
+"script.js",
+"manifest.json",
+"icons/weather-icon.png",
+"icons/weather-icon-512.png"
 ];
-
-// Install Service Worker
+// Install: cache core files
 self.addEventListener("install", event => {
-  event.waitUntil(
-    caches.open(CACHE_NAME)
-      .then(cache => {
-        return cache.addAll(urlsToCache);
-      })
-  );
+console.log("Service Worker: Installing...");
+event.waitUntil(
+caches.open(CACHE_NAME)
+  .then(cache => cache.addAll(urlsToCache))
+);
 });
-
-// Fetch from cache if offline
-self.addEventListener("fetch", event => {
-  event.respondWith(
-    caches.match(event.request)
-      .then(response => {
-        return response || fetch(event.request);
-      })
-  );
-});
-
-// Activate and clean old cache
+// Activate: clean old caches
 self.addEventListener("activate", event => {
-  const cacheWhitelist = [CACHE_NAME];
-
-  event.waitUntil(
-    caches.keys().then(cacheNames => {
-      return Promise.all(
-        cacheNames.map(cacheName => {
-          if (!cacheWhitelist.includes(cacheName)) {
-            return caches.delete(cacheName);
-          }
-        })
-      );
+console.log("Service Worker: Activated");
+event.waitUntil(
+caches.keys().then(keys =>
+  Promise.all(
+    keys.map(key => {
+      if(key !== CACHE_NAME) return caches.delete(key);
     })
-  );
+  )
+)
+);
+});
+// Fetch: serve cached files if offline
+self.addEventListener("fetch", event => {
+event.respondWith(
+caches.match(event.request)
+  .then(response => response || fetch(event.request))
+);
+
 });
