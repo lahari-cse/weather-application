@@ -8,6 +8,8 @@ The app is built using HTML, CSS, and JavaScript, and it uses a free weather API
 ## 📸 Screenshots
 
 
+
+
 ## 🚀 Features
 
 - 🌍 Search weather by city name
