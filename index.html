@@ -3,19 +3,22 @@
 
 <head>
 
-<!-- Basic Page Setup -->
+<!-- Character encoding -->
 <meta charset="UTF-8">
+
+<!-- Responsive design for mobile -->
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
+<!-- Page title -->
 <title>Weather Dashboard</title>
 
-<!-- Connect CSS File -->
+<!-- Link CSS file -->
 <link rel="stylesheet" href="style.css">
 
-<!-- Connect PWA Manifest -->
+<!-- PWA manifest file -->
 <link rel="manifest" href="manifest.json">
 
-<!-- Chart Library for Weather Analytics -->
+<!-- Chart.js library for graphs -->
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 </head>
@@ -25,11 +28,14 @@
 <!-- Loading Screen -->
 <div id="loader">
 
+<!-- Spinner animation -->
 <div class="spinner"></div>
 
+<!-- Loading message -->
 <p>Loading Weather Data...</p>
 
 </div>
+
 
 <!-- Main App Container -->
 <div class="app">
@@ -39,55 +45,51 @@
 <!-- App Title -->
 <h2>Weather Dashboard</h2>
 
-<!-- City Search Section -->
+
+<!-- Search Section -->
 <div class="search">
 
-<!-- City Input -->
+<!-- City input field -->
 <input id="cityInput" placeholder="Enter city name">
 
-<!-- Search Button (calls JS function) -->
+<!-- Button to search weather -->
 <button onclick="getWeather()">Search</button>
-
-<!-- Voice Search Button -->
-<button onclick="startVoice()">🎙</button>
 
 </div>
 
-<!-- Current Weather Section -->
-<div class="weather">
 
-<!-- Weather Icon -->
-<img id="weatherIcon" width="80">
+<!-- Weather Information -->
+<div class="weather">
 
 <!-- Temperature -->
 <h1 id="temp">--°C</h1>
 
-<!-- Weather Condition -->
-<p id="condition">Loading...</p>
+<!-- Weather condition -->
+<p id="condition">Search a city</p>
 
-<!-- Weather Details -->
+
+<!-- Weather details -->
 <div class="details">
 
+<!-- Humidity -->
 <div>
 <p>Humidity</p>
 <span id="humidity">--%</span>
 </div>
 
+<!-- Wind -->
 <div>
 <p>Wind</p>
 <span id="wind">-- km/h</span>
 </div>
 
-<div>
-<p>Air Quality</p>
-<span id="aqi">--</span>
-</div>
-
+<!-- Sunrise -->
 <div>
 <p>Sunrise</p>
 <span id="sunrise">--</span>
 </div>
 
+<!-- Sunset -->
 <div>
 <p>Sunset</p>
 <span id="sunset">--</span>
@@ -97,28 +99,17 @@
 
 </div>
 
-<!-- 5 Day Forecast Section -->
-<h3>5 Day Forecast</h3>
-
-<div id="forecastContainer"></div>
-
-<!-- Hourly Forecast Section -->
-<h3>Hourly Forecast</h3>
-
-<div id="hourlyForecast"></div>
-
-<!-- Weather Analytics Charts -->
+<!-- Weather chart -->
 <h3>Weather Analytics</h3>
 
+<!-- Canvas where graph will be drawn -->
 <canvas id="tempChart"></canvas>
-<canvas id="humidityChart"></canvas>
-<canvas id="windChart"></canvas>
 
 </div>
 
 </div>
 
-<!-- Connect Main JavaScript File -->
+<!-- Connect JavaScript file -->
 <script src="script.js"></script>
 
 </body>
