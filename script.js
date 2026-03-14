@@ -9,7 +9,13 @@ let tempChart;
 ========================== */
 
 window.onload = () => {
+
     document.getElementById("loader").style.display = "none";
+
+    /* show today's day and date */
+    showTodayDate();
+
+}
 }
 
 /* ==========================
@@ -117,24 +123,32 @@ container.appendChild(drop);
 
 function drawForecast(data){
 
-const container=document.getElementById("forecastContainer");
-container.innerHTML="";
+const container = document.getElementById("forecastContainer");
+container.innerHTML = "";
 
-/* Skip today → start from tomorrow */
+const today = new Date().toDateString();
+let count = 0;
 
-for(let i=1;i<=5;i++){
+for(let i = 0; i < data.daily.time.length; i++){
 
-const date=new Date(data.daily.time[i]);
-const max=Math.round(data.daily.temperature_2m_max[i]);
-const min=Math.round(data.daily.temperature_2m_min[i]);
-const code=data.daily.weathercode[i];
+const forecastDate = new Date(data.daily.time[i]);
 
-const dayName=date.toLocaleDateString('en-US',{weekday:'short'});
+/* skip today's date */
 
-const card=document.createElement("div");
+if(forecastDate.toDateString() === today){
+continue;
+}
+
+const max = Math.round(data.daily.temperature_2m_max[i]);
+const min = Math.round(data.daily.temperature_2m_min[i]);
+const code = data.daily.weathercode[i];
+
+const dayName = forecastDate.toLocaleDateString('en-US',{weekday:'short'});
+
+const card = document.createElement("div");
 card.classList.add("forecast-card");
 
-card.innerHTML=`
+card.innerHTML = `
 <p>${dayName}</p>
 <p>${getWeatherDescription(code)}</p>
 <p>${max}°/${min}°</p>
@@ -142,7 +156,31 @@ card.innerHTML=`
 
 container.appendChild(card);
 
+count++;
+
+if(count === 5) break;
+
 }
+
+}
+/* ==========================
+   TODAY DATE
+========================== */
+
+function showTodayDate(){
+
+const today = new Date();
+
+const formatted = today.toLocaleDateString(
+'en-US',
+{
+weekday:'long',
+day:'numeric',
+month:'long',
+year:'numeric'
+});
+
+document.getElementById("todayDate").innerText = formatted;
 
 }
 
