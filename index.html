@@ -12,32 +12,36 @@
 <!-- Page title -->
 <title>Weather Dashboard</title>
 
-<!-- Link CSS file -->
+<!-- Connect CSS file -->
 <link rel="stylesheet" href="style.css">
 
-<!-- PWA manifest file -->
+<!-- PWA manifest -->
 <link rel="manifest" href="manifest.json">
 
-<!-- Chart.js library for graphs -->
+<!-- Chart.js for weather analytics -->
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 </head>
 
 <body>
 
-<!-- Loading Screen -->
+<!-- ===============================
+     LOADING SCREEN
+================================ -->
+
 <div id="loader">
 
-<!-- Spinner animation -->
 <div class="spinner"></div>
 
-<!-- Loading message -->
 <p>Loading Weather Data...</p>
 
 </div>
 
 
-<!-- Main App Container -->
+<!-- ===============================
+     MAIN APP
+================================ -->
+
 <div class="app">
 
 <div class="card">
@@ -46,50 +50,53 @@
 <h2>Weather Dashboard</h2>
 
 
-<!-- Search Section -->
+<!-- ===============================
+     SEARCH SECTION
+================================ -->
+
 <div class="search">
 
-<!-- City input field -->
 <input id="cityInput" placeholder="Enter city name">
 
-<!-- Button to search weather -->
 <button onclick="getWeather()">Search</button>
 
 </div>
 
 
-<!-- Weather Information -->
+<!-- ===============================
+     WEATHER INFORMATION
+================================ -->
+
 <div class="weather">
+
+<!-- Weather Icon -->
+<img id="weatherIcon" width="90">
 
 <!-- Temperature -->
 <h1 id="temp">--°C</h1>
 
-<!-- Weather condition -->
+<!-- Weather Condition -->
 <p id="condition">Search a city</p>
 
 
-<!-- Weather details -->
+<!-- Weather Details -->
 <div class="details">
 
-<!-- Humidity -->
 <div>
 <p>Humidity</p>
 <span id="humidity">--%</span>
 </div>
 
-<!-- Wind -->
 <div>
 <p>Wind</p>
 <span id="wind">-- km/h</span>
 </div>
 
-<!-- Sunrise -->
 <div>
 <p>Sunrise</p>
 <span id="sunrise">--</span>
 </div>
 
-<!-- Sunset -->
 <div>
 <p>Sunset</p>
 <span id="sunset">--</span>
@@ -99,17 +106,25 @@
 
 </div>
 
-<!-- Weather chart -->
+
+<!-- ===============================
+     WEATHER ANALYTICS
+================================ -->
+
 <h3>Weather Analytics</h3>
 
-<!-- Canvas where graph will be drawn -->
+<!-- Temperature chart -->
 <canvas id="tempChart"></canvas>
 
 </div>
 
 </div>
 
-<!-- Connect JavaScript file -->
+
+<!-- ===============================
+     MAIN JAVASCRIPT
+================================ -->
+
 <script src="script.js"></script>
 
 </body>
