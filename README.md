@@ -10,18 +10,18 @@ The app is built using HTML, CSS, and JavaScript, and it uses a free weather API
 
 ## 🚀 Features
 
- 🌍 Search weather by city name
- 📍 Get weather using current location
- 🌡 Displays current temperature and conditions
- 💧 Shows humidity and wind speed
- 🌅 Displays sunrise and sunset times
- 📅 5-Day weather forecast
- 📊 Hourly temperature chart
- 🎨 Dynamic background based on weather
- ☀️ Weather animations (sun, clouds, rain)
- ⚡ Loading screen
- 📱 Progressive Web App (PWA) support
- 📡 Offline caching using Service Worker
+- 🌍 Search weather by city name
+- 📍 Get weather using current location
+- 🌡 Displays current temperature and conditions
+- 💧 Shows humidity and wind speed
+- 🌅 Displays sunrise and sunset times
+- 📅 5-Day weather forecast
+- 📊 Hourly temperature chart
+- 🎨 Dynamic background based on weather
+- ☀️ Weather animations (sun, clouds, rain)
+- ⚡ Loading screen
+- 📱 Progressive Web App (PWA) support
+- 📡 Offline caching using Service Worker
 
 ## 🛠 Technologies Used
 
