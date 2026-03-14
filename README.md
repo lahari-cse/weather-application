@@ -7,8 +7,17 @@ The app is built using HTML, CSS, and JavaScript, and it uses a free weather API
 
 ## 📸 Screenshots
 
+ ### Weather Dashboard
+ ![Dashboard](dashboard.png)
+ 
+ ### Weather Report
+ ![Report](forecast.png)
+ 
+ ### 5 Day Forecast
+ ![Forecast](5-day-forecast.png)
 
-
+ ### Hourly Temperature Chart
+ ![Hourly Temperature](hourlytemperature.png) 
 
 ## 🚀 Features
 
