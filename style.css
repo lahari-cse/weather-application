@@ -1,174 +1,222 @@
-/* General body & transitions */
-body{
-  margin:0;
-  font-family:Arial, sans-serif;
-  transition:background 0.6s ease;
+/* =========================
+   GLOBAL STYLES
+========================= */
+body {
+    margin: 0;
+    font-family: 'Arial', sans-serif;
+    transition: background 0.6s ease;
+    color: white;
+    overflow-x: hidden;
 }
 
-/* Dynamic backgrounds */
-.sunny{background: linear-gradient(135deg,#f6d365,#fda085);}
-.night{background: linear-gradient(135deg,#141e30,#243b55);}
-.cloudy{background: linear-gradient(135deg,#bdc3c7,#2c3e50);}
-.rain{background: linear-gradient(135deg,#4e54c8,#8f94fb);}
+/* =========================
+   DYNAMIC BACKGROUNDS
+========================= */
+.sunny { background: linear-gradient(135deg, #f6d365, #fda085); }
+.cloudy { background: linear-gradient(135deg, #bdc3c7, #2c3e50); }
+.rain { background: linear-gradient(135deg, #4e54c8, #8f94fb); }
+.night { background: linear-gradient(135deg, #141e30, #243b55); }
 
-/* Main app container */
-.app{
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  min-height:100vh;
-}
-
-/* Weather card */
-.card{
-  background: rgba(255,255,255,0.2);
-  padding:25px;
-  border-radius:20px;
-  backdrop-filter: blur(15px);
-  width:380px;
-  color:white;
-  box-shadow:0 10px 30px rgba(0,0,0,0.2);
+/* =========================
+   APP CONTAINER
+========================= */
+.app {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
 }
 
-/* Search section */
-.search{
-  display:flex;
-  gap:10px;
-  margin-bottom:20px;
+/* =========================
+   WEATHER CARD
+========================= */
+.card {
+    position: relative; /* for animation layer */
+    background: rgba(255, 255, 255, 0.15);
+    padding: 25px;
+    border-radius: 25px;
+    backdrop-filter: blur(15px);
+    width: 380px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+    text-align: center;
+    transition: transform 0.3s ease;
 }
-.search input{
-  flex:1;
-  padding:8px;
-  border-radius:5px;
-  border:none;
-}
-button{
-  padding:8px 12px;
-  border:none;
-  border-radius:5px;
-  cursor:pointer;
-  background:rgba(255,255,255,0.3);
-  color:white;
-  font-weight:bold;
-}
-button:hover{
-  background:rgba(255,255,255,0.5);
+.card:hover {
+    transform: translateY(-5px);
 }
 
-/* Weather Info */
-.weather{
-  text-align:center;
+/* =========================
+   SEARCH SECTION
+========================= */
+.search {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
 }
-#weatherIcon{margin-bottom:10px;}
-.details{
-  display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:10px;
-  margin-top:15px;
+.search input {
+    flex: 1;
+    padding: 10px;
+    border-radius: 8px;
+    border: none;
+    outline: none;
+    font-size: 16px;
 }
-
-/* Forecast Cards */
-.forecast-container{
-  display:flex;
-  justify-content:space-between;
-  margin-top:10px;
+button {
+    padding: 10px 14px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    background: rgba(255,255,255,0.3);
+    color: white;
+    font-weight: bold;
+    transition: 0.3s ease;
 }
-.forecast-card{
-  background: rgba(255,255,255,0.3);
-  border-radius:10px;
-  padding:10px;
-  width:65px;
-  text-align:center;
-}
-
-/* Chart */
-canvas{
-  margin-top:20px;
-  background: rgba(255,255,255,0.2);
-  padding:10px;
-  border-radius:10px;
+button:hover {
+    background: rgba(255,255,255,0.6);
 }
 
-/* Loader */
-#loader{
-  position:fixed;
-  top:0;
-  left:0;
-  width:100%;
-  height:100%;
-  background:#4facfe;
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
-  align-items:center;
-  color:white;
-  z-index:1000;
+/* =========================
+   CURRENT WEATHER
+========================= */
+.weather img#weatherIcon {
+    margin-bottom: 10px;
+    transition: transform 0.5s ease;
 }
-.spinner{
-  border:6px solid white;
-  border-top:6px solid transparent;
-  border-radius:50%;
-  width:50px;
-  height:50px;
-  animation:spin 1s linear infinite;
+.weather h1 {
+    font-size: 48px;
+    margin: 5px 0;
 }
-@keyframes spin{
-  0%{transform:rotate(0deg)}
-  100%{transform:rotate(360deg)}
+.weather p#condition {
+    font-size: 20px;
+    margin: 5px 0 15px 0;
+}
+.details {
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    gap: 15px;
+}
+.details p {
+    font-weight: bold;
+    margin: 0;
+}
+.details span {
+    font-size: 16px;
 }
 
-/* Weather Animation Layer */
-.weather-animation{
-  position:absolute;
-  top:0;
-  left:0;
-  width:100%;
-  height:100%;
-  pointer-events:none;
-  overflow:hidden;
-  border-radius:20px;
+/* =========================
+   FORECAST CARDS
+========================= */
+.forecast-container {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 15px;
 }
-.sun, .cloud, .raindrop, .star{
-  position:absolute;
+.forecast-card {
+    background: rgba(255,255,255,0.25);
+    border-radius: 15px;
+    padding: 10px;
+    width: 65px;
+    text-align: center;
+    transition: transform 0.3s ease;
 }
-.sun{
-  width:60px; height:60px;
-  background:yellow;
-  border-radius:50%;
-  top:20px; right:20px;
-  animation:spinSun 10s linear infinite;
+.forecast-card:hover {
+    transform: translateY(-5px);
 }
-@keyframes spinSun{
-  0%{transform:rotate(0deg);}
-  100%{transform:rotate(360deg);}
+.forecast-card img {
+    margin-bottom: 5px;
 }
-.cloud{
-  width:80px; height:50px;
-  background:rgba(255,255,255,0.6);
-  border-radius:50%;
-  animation:moveCloud 20s linear infinite;
-  top:50px;
+
+/* =========================
+   CHART
+========================= */
+canvas {
+    margin-top: 20px;
+    background: rgba(255,255,255,0.2);
+    padding: 12px;
+    border-radius: 12px;
 }
-@keyframes moveCloud{
-  0%{left:-100px;}
-  100%{left:400px;}
+
+/* =========================
+   LOADING SCREEN
+========================= */
+#loader {
+    position: fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background: #4facfe;
+    display:flex;
+    flex-direction: column;
+    justify-content:center;
+    align-items:center;
+    color:white;
+    z-index: 1000;
 }
-.raindrop{
-  width:3px; height:15px;
-  background:lightblue;
-  animation:fall 1s linear infinite;
+.spinner {
+    border: 6px solid white;
+    border-top: 6px solid transparent;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    animation: spin 1s linear infinite;
 }
-@keyframes fall{
-  0%{top:-20px;}
-  100%{top:100px;}
+@keyframes spin {
+    0% { transform: rotate(0deg);}
+    100% { transform: rotate(360deg);}
 }
-.star{
-  width:3px; height:3px;
-  background:white;
-  border-radius:50%;
-  animation:twinkle 2s infinite;
+
+/* =========================
+   WEATHER ANIMATION
+========================= */
+.weather-animation {
+    position: absolute;
+    top:0; left:0;
+    width: 100%; height: 100%;
+    pointer-events: none;
+    overflow: hidden;
+    border-radius: 25px;
 }
-@keyframes twinkle{
-  0%,100%{opacity:0.2;}
-  50%{opacity:1;}
+.sun, .cloud, .raindrop, .star {
+    position: absolute;
+}
+.sun {
+    width: 60px; height: 60px;
+    background: yellow;
+    border-radius: 50%;
+    top: 20px; right: 20px;
+    animation: spinSun 15s linear infinite;
+}
+@keyframes spinSun {
+    0%{transform:rotate(0deg);}
+    100%{transform:rotate(360deg);}
+}
+.cloud {
+    width: 80px; height: 50px;
+    background: rgba(255,255,255,0.6);
+    border-radius: 50%;
+    animation: moveCloud 25s linear infinite;
+}
+@keyframes moveCloud {
+    0%{left:-100px;}
+    100%{left:400px;}
+}
+.raindrop {
+    width: 3px; height: 15px;
+    background: lightblue;
+    animation: fall 1s linear infinite;
+}
+@keyframes fall {
+    0%{top:-20px;}
+    100%{top:100px;}
+}
+.star {
+    width: 3px; height: 3px;
+    background:white;
+    border-radius:50%;
+    animation: twinkle 2s infinite;
+}
+@keyframes twinkle {
+    0%,100%{opacity:0.2;}
+    50%{opacity:1;}
 }
