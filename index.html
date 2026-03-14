@@ -1,92 +1,103 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="en">
 <head>
+
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Weather Dashboard</title>
 
 <link rel="stylesheet" href="style.css">
-<link rel="manifest" href="manifest.json">
-<link rel="icon" href="icons/weather-icon.png">
 
+<!-- Chart.js for hourly temperature chart -->
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#4facfe">
+
 </head>
 
-<body>
+<body class="sunny">
 
 <!-- Loading Screen -->
 <div id="loader">
-  <div class="spinner"></div>
-  <p>Loading Weather Data...</p>
+    <div class="spinner"></div>
+    <p>Loading Weather...</p>
 </div>
 
-<!-- Main App -->
 <div class="app">
-  <div class="card">
 
-    <h2>Weather Dashboard</h2>
+<div class="card">
 
-    <!-- Search -->
-    <div class="search">
-      <input id="cityInput" placeholder="Enter city name">
-      <button onclick="getWeather()">Search</button>
-      <button onclick="getCurrentLocation()">📍 Location</button>
-    </div>
+<!-- Weather animation layer -->
+<div class="weather-animation"></div>
 
-    <!-- Current Weather -->
-    <div class="weather">
-      <img id="weatherIcon" width="90">
-      <h1 id="temp">--°C</h1>
-      <p id="condition">Search a city</p>
+<!-- Search Section -->
+<div class="search">
 
-      <div class="details">
-        <div>
-          <p>Humidity</p>
-          <span id="humidity">--%</span>
-        </div>
+<input 
+type="text" 
+id="cityInput" 
+placeholder="Enter city name">
 
-        <div>
-          <p>Wind</p>
-          <span id="wind">-- km/h</span>
-        </div>
+<button onclick="getWeather()">Search</button>
 
-        <div>
-          <p>Sunrise</p>
-          <span id="sunrise">--</span>
-        </div>
-
-        <div>
-          <p>Sunset</p>
-          <span id="sunset">--</span>
-        </div>
-      </div>
-    </div>
-
-    <!-- Forecast -->
-    <h3>5-Day Forecast</h3>
-    <div id="forecastContainer" class="forecast-container"></div>
-
-    <!-- Chart -->
-    <h3>Hourly Temperature</h3>
-    <canvas id="tempChart"></canvas>
-
-    <!-- Animations -->
-    <div id="weatherAnimation" class="weather-animation"></div>
-
-  </div>
 </div>
 
-<script>
+<!-- Current Weather -->
+<div class="weather">
 
-if('serviceWorker' in navigator){
-navigator.serviceWorker.register('service-worker.js')
-.then(()=>console.log("Service Worker Registered"))
-.catch(err=>console.log(err));
+<img id="weatherIcon" src="" alt="Weather Icon" width="80">
+
+<h1 id="temperature">--°C</h1>
+
+<p id="condition">Weather Condition</p>
+
+</div>
+
+<!-- Weather Details -->
+<div class="details">
+
+<div>
+<p>Humidity</p>
+<span id="humidity">--%</span>
+</div>
+
+<div>
+<p>Wind</p>
+<span id="wind">-- km/h</span>
+</div>
+
+<div>
+<p>Pressure</p>
+<span id="pressure">-- hPa</span>
+</div>
+
+<div>
+<p>Feels Like</p>
+<span id="feels">--°C</span>
+</div>
+
+</div>
+
+<!-- 5 Day Forecast -->
+<div class="forecast-container" id="forecastContainer">
+
+<!-- Forecast cards will be added dynamically by JavaScript -->
+
+</div>
+
+<!-- Hourly Temperature Chart -->
+<canvas id="hourlyChart"></canvas>
+
+</div>
+
+</div>
+  <script>
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('service-worker.js');
 }
-
 </script>
-
+<!-- connect JavaScript -->
 <script src="script.js"></script>
 
 </body>
