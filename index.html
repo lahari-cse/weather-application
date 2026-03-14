@@ -69,6 +69,13 @@
 
   </div>
 </div>
+  <script>
+if('serviceWorker' in navigator){
+    navigator.serviceWorker.register('service-worker.js')
+    .then(reg => console.log('Service Worker Registered'))
+    .catch(err => console.log('Service Worker registration failed:', err));
+}
+</script>
 <!-- Connect javascript -->
 <script src="script.js"></script>
 </body>
