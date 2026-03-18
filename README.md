@@ -62,7 +62,7 @@ This project uses the free Open-Meteo Weather API.
 ## ⚙️ How to Run the Project
 
 1. Clone the repository
-git clone https://github.com/your-username/weather-dashboard.git
+git clone https://github.com/lahari-cse/weather-dashboard.git
 2. Open the project folder.  
 3. Run **index.html** in a browser.
 No installation or API key is required.
